@@ -4,40 +4,40 @@ import PropTypes from 'prop-types';
 import './PostContainer.css';
 
 import CommentSection from './CommentSection';
+import dummyData from '../dummy-data';
 
 
 
 class PostContainer extends React.Component {
-    constructor(props) {
-        super(props);
-            this.state = {
-                likes: this.props.dummyData.map(el => el.likes),
-                increaseLikes: false
-            };
-    }
+    constructor () {
+        super();
+        this.state = {
+          dummyData: [],
+          posts: []
+        };
+      }
+      componentDidMount() {
+        // after the initial render, CDM runs one time only
+        // perform initial data fetches here - update state with the fetched data
+        this.setState({ posts: dummyData });
+      }
 
-    increaseLikeHandler = e => {
-        if (this.state.increaseLikes === false) {
-            this.setState(prevState => {
-                return {
-                    likes: prevState.likes + 1,
-                    increaseLikes:true
-                }
-            })
-        } else {
-            this.setState(prevState => {
-                return {
-                    likes: prevState.likes -1,
-                    increaseLikes: false
-                }
-            })
-        }
+    increaseLikeHandler = index => {
+        const newPost = [...this.state.posts]
+        if (newPost[index].liked) {
+            newPost[index].likes--
+            newPost[index].liked = false;
+        } 
+        else {
+            newPost[index].likes++
+            newPost[index].liked = true;
+        } this.setState({ posts: newPost })
     }
 
     render() {
         return (
             <div className="post-container">
-                {this.props.dummyData.map(dummyData => ( 
+                {this.state.posts.map((dummyData, index) => ( 
                     <div key={dummyData.username} className="user-header">
                         <div className="user-avi">
                             <img src={dummyData.thumbnailUrl} alt={dummyData.username} width="10%" height="10%" />
@@ -45,7 +45,7 @@ class PostContainer extends React.Component {
                         </div>
                         <img src={dummyData.imageUrl} alt={dummyData.username} />
                         <div className="post-icons">
-                            <button onClick={this.increaseLikeHandler}><img src="insta_like.png" alt="I like this" width="25px" height="25px"/></button>
+                            <button onClick={()=>this.increaseLikeHandler(index)}><img src="insta_like.png" alt="I like this" width="25px" height="25px"/></button>
                             <img src="speech-bubble.png" alt="Make a Comment" width="25px" height="25px" />
                         </div>
                         <p className="like-info"><strong>{dummyData.likes} likes</strong></p>
