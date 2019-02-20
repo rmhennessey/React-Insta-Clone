@@ -11,10 +11,19 @@ class App extends Component {
   constructor () {
     super();
     this.state = {
-      dummyData
+      dummyData: []
     };
 
   }
+
+  componentDidMount() {
+    // after the initial render, CDM runs one time only
+    // perform initial data fetches here - update state with the fetched data
+    console.log('CDM running');
+    this.setState({ dummyData: dummyData });
+  }
+
+
   render() {
     return (
       <div className="App">
