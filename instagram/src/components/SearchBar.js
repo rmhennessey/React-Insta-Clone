@@ -1,4 +1,5 @@
 import React from 'react';
+import PostContainer from "./PostContainer/PostContainer";
 
 import './SearchBar.css';
 
@@ -12,6 +13,7 @@ function SearchBar (props) {
             <input
                 type="text"
                 placeholder="Search"
+                onChange={props.searchHandler}
             />
             <div className="icons-header">
                 <img src="insta_search.png" alt="Find Friends" width="35px" height="35px" />

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import dummyData from './dummy-data';
+import PostsPage from './components/PostContainer/PostsPage';
+import Authenticate from './components/Authentication/Authenticate';
 
 import './App.css';
-
-import SearchBar from './components/SearchBar';
-import PostContainer from './components/PostContainer';
 
 
 class App extends Component {
@@ -13,11 +12,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-       <SearchBar />
-       <PostContainer />
+        <PostsPage />
       </div>
     );
   }
 }
 
-export default App;
+export default Authenticate(App);

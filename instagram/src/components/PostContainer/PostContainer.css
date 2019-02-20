@@ -21,10 +21,16 @@
 
 .post-container .user-header .post-icons {
     padding-top: 15px;
+    border: none;
+}
+
+.post-container .user-header button {
+    border: none;
 }
 
 .post-container .user-header .post-icons img {
     padding-right: 10px;
+
 }
 
 .post-container .user-header .like-info {
