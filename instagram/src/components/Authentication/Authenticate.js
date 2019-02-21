@@ -1,12 +1,12 @@
 
 import React from 'react'; 
-import Login from './Login/Login';
+import Login from '../Login/Login';
 
 const Authenticate = App => 
 class extends React.Component {
-    render() {
-        return <App />;
-      }
+    // render() {
+    //     return <App />;
+    //   }
 
     constructor(){
         super(); 

@@ -1,13 +1,68 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './PostContainer.css';
+// import './PostContainer.css';
 
 import SearchBar from '../SearchBar';
 import CommentSection from '../CommentSection';
 import dummyData from '../../dummy-data';
+import styled from 'styled-components';
 
 
+const PostContainerDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+`;
+
+const PostContainerUserHeaderDiv = styled.div `
+    padding-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+`;
+
+const PostContainerUserHeaderUserAvi= styled.div `
+    display: flex;
+    align-items: center;
+    padding-bottom: 15px;
+    padding-top: 10px;
+    padding-left: 7px;
+`;
+
+
+const PostContainerUserHeaderUserImg= styled.img `
+    border-radius: 50px;
+    
+`;
+
+const PostContainerUserHeaderUserPTag = styled.p `
+    padding-left: 10px;
+    margin-top: 10px;
+
+`;
+
+const PostContainerUserHeaderUserIcons= styled.div`
+    padding-top: 15px;
+    border: none;
+`;
+
+const PostContainerUserHeaderUserButton = styled.button`
+    border: none;
+`;
+
+const PostContainerUserHeaderUserPostIconsImg = styled.img `
+    padding-right: 10px;
+`;
+
+const PostContainerLikeInfo = styled.p `
+    margin: 7px 0;
+    padding-left: 7px;
+`;
+
+const PostContainerTimeStamp = styled.p `
+    padding-left: 7px;
+`;
 
 class PostContainer extends React.Component {
     constructor () {
@@ -46,47 +101,45 @@ class PostContainer extends React.Component {
 
     render() {
         return (
-            <div className="post-container">
+            <PostContainerDiv >
                 <SearchBar searchHandler={this.searchHandler} />
                     {this.state.filteredPosts.length === 0 ?
                         this.state.posts.map((dummyData, index) => ( 
-                            <div key={dummyData.username} className="user-header">
-                                    <div className="user-avi">
-                                        <img src={dummyData.thumbnailUrl} alt={dummyData.username} width="10%" height="10%" />
-                                    <p><strong>{dummyData.username}</strong></p>
-                                    </div>
+                            <PostContainerUserHeaderDiv key={dummyData.username} >
+                                    <PostContainerUserHeaderUserAvi>
+                                        <PostContainerUserHeaderUserImg img src={dummyData.thumbnailUrl} alt={dummyData.username} width="45px" height="45px" />
+                                    <PostContainerUserHeaderUserPTag><strong>{dummyData.username}</strong></PostContainerUserHeaderUserPTag>
+                                    </PostContainerUserHeaderUserAvi>
                                     <img src={dummyData.imageUrl} alt={dummyData.username} />
-                                    <div className="post-icons">
-                                        <button onClick={()=>this.increaseLikeHandler(index)}><img src="insta_like.png" alt="I like this" width="25px" height="25px"/></button>
-                                        <img src="speech-bubble.png" alt="Make a Comment" width="25px" height="25px" />
-                                    </div>
-                                    <p className="like-info"><strong>{dummyData.likes} likes</strong></p>
+                                    <PostContainerUserHeaderUserIcons>
+                                        <PostContainerUserHeaderUserButton onClick={()=>this.increaseLikeHandler(index)}><img src="insta_like.png" alt="I like this" width="25px" height="25px"/></PostContainerUserHeaderUserButton>
+                                        <PostContainerUserHeaderUserPostIconsImg img src="speech-bubble.png" alt="Make a Comment" width="25px" height="25px" />
+                                    </PostContainerUserHeaderUserIcons>
+                                    <PostContainerLikeInfo><strong>{dummyData.likes} likes</strong></PostContainerLikeInfo>
                                 <CommentSection commentData={dummyData.comments} />
-                                 {dummyData.timestamp}
-                            </div>
+                                 <PostContainerTimeStamp>{dummyData.timestamp}</PostContainerTimeStamp>
+                            </PostContainerUserHeaderDiv>
 
 
         )):
             this.state.filteredPosts.map((dummyData, index) => ( 
-                <div key={dummyData.timestamp} className='userHeader'>
-                    <div className='profileHeader'>
-                        <img src={dummyData.thumbnailUrl} alt={dummyData.username} width='30px' height='30px' className='imgThumb' />
+                <PostContainerUserHeaderDiv key={dummyData.timestamp}>
+                    <PostContainerUserHeaderUserAvi>
+                        <PostContainerUserHeaderUserImg img src={dummyData.thumbnailUrl} alt={dummyData.username} width='30px' height='30px' className='imgThumb' />
                         <p className='userName'>{dummyData.username}</p>
-                    </div>
+                    </PostContainerUserHeaderUserAvi>
                         <img src={dummyData.imageUrl} alt={dummyData.username} />
-                     <div className='postText'>
-                            <div className='icons'>
-                                <i onClick={()=>this.increaseLikeHeandler(index)} class="far fa-heart fa-lg"></i>
-                                <i class="far fa-comment fa-lg"></i>
-                            </div>
-                        <p className='likes'>{dummyData.likes} likes</p>
-                        <CommentSection commentData={dummyData.comments} />
-                        <p className='stamp'>{dummyData.timestamp}</p>
-                    </div>
-                </div>
+                        <PostContainerUserHeaderUserIcons>
+                                        <PostContainerUserHeaderUserButton onClick={()=>this.increaseLikeHandler(index)}><img src="insta_like.png" alt="I like this" width="25px" height="25px"/></PostContainerUserHeaderUserButton>
+                                        <PostContainerUserHeaderUserPostIconsImg img src="speech-bubble.png" alt="Make a Comment" width="25px" height="25px" />
+                                    </PostContainerUserHeaderUserIcons>
+                                    <PostContainerLikeInfo><strong>{dummyData.likes} likes</strong></PostContainerLikeInfo>
+                                <CommentSection commentData={dummyData.comments} />
+                                <PostContainerTimeStamp>{dummyData.timestamp}</PostContainerTimeStamp>
+                </ PostContainerUserHeaderDiv>
             ))    
             }
-            </div>
+            </PostContainerDiv>
         );
     };
 }

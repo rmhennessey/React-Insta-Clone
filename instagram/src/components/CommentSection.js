@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from "styled-components";
 
 
-
-import './CommentSection.css';
+// import './CommentSection.css';
 import dummyData from '../dummy-data';
+
+const CommentSectionDiv = styled.div `
+    line-height: 10px;
+    padding-left: 7px;
+`;
 
 class CommentSection extends Component {
     constructor (props) {
@@ -39,7 +44,7 @@ class CommentSection extends Component {
 
     render() {
         return (
-            <div className="comment-section">
+            <CommentSectionDiv>
             {this.state.comments.map(comment => (
                 <div key={comment.text}>
                     <p><strong>{comment.username}</strong> {comment.text}</p>
@@ -54,7 +59,7 @@ class CommentSection extends Component {
                     onChange={this.changeHandler}
                 />
             </form>
-            </div>
+            </CommentSectionDiv>
         );
     }
 
