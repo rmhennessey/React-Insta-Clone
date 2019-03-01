@@ -1,0 +1,38 @@
+.post-container {
+    display: flex;
+    
+}
+
+.post-container .user-header{
+    padding-bottom: 25px;
+}
+
+.post-container .user-header .user-avi {
+    display: flex;
+    align-items: center;
+    padding-bottom: 15px;
+
+}
+
+.post-container .user-header .user-avi img {
+    border-radius: 60px;
+    padding-right: 10px;
+}
+
+.post-container .user-header .post-icons {
+    padding-top: 15px;
+    border: none;
+}
+
+.post-container .user-header button {
+    border: none;
+}
+
+.post-container .user-header .post-icons img {
+    padding-right: 10px;
+
+}
+
+.post-container .user-header .like-info {
+    margin: 7px 0;
+}
